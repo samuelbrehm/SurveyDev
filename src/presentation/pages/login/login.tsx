@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Styles from './login-styles.scss'
 
@@ -16,6 +16,7 @@ type Props = {
 }
 
 const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
+  const history = useHistory()
   const [state, setState] = useState({
     isLoading: false,
     email: '',
@@ -47,6 +48,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
         password: state.password
       })
       localStorage.setItem('accessToken', account.accessToken)
+      history.replace('/')
     } catch (error) {
       setState({
         ...state,
@@ -58,12 +60,12 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
 
   return (
     <div className={Styles.login}>
-      <LoginHeader/>
+      <LoginHeader />
       <Context.Provider value={{ state, setState }}>
         <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
-          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-          <Input type="password" name="password" placeholder="Digite sua senha"/>
+          <Input type="email" name="email" placeholder="Digite seu e-mail" />
+          <Input type="password" name="password" placeholder="Digite sua senha" />
           <button
             data-testid="submit"
             disabled={!!state.emailError || !!state.passwordError}
@@ -72,10 +74,10 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
             Entrar
           </button>
           <Link to="/signup" data-testid="signup" className={Styles.link}>Criar conta</Link>
-          <FormStatus/>
+          <FormStatus />
         </form>
       </Context.Provider>
-      <Footer/>
+      <Footer />
     </div>
 
   )
