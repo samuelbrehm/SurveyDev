@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-import { RequiredFieldValidation } from '@/validation/required-field/required-field-validation'
+import { RequiredFieldValidation } from '@/validation/validators/required-field/required-field-validation'
 import { RequiredFieldError } from '@/validation/errors'
 
 function makeSut (): RequiredFieldValidation {
