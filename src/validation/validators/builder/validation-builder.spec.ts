@@ -1,6 +1,6 @@
 import { RequiredFieldValidation } from '@/validation/validators/required-field/required-field-validation'
 import { ValidationBuilder as sut } from '@/validation/validators/builder/validation-builder'
-import { EmailValidation } from '@/validation/validators'
+import { EmailValidation, MinLengthValidation } from '@/validation/validators'
 
 describe('ValidationBuilder', () => {
   test('Should return RequiredFieldValidator', () => {
@@ -11,5 +11,10 @@ describe('ValidationBuilder', () => {
   test('Should return EmailValidation', () => {
     const validations = sut.field('any_field').email().build()
     expect(validations).toEqual([new EmailValidation('any_field')])
+  })
+
+  test('Should return MinLengthValidation', () => {
+    const validations = sut.field('any_field').min(5).build()
+    expect(validations).toEqual([new MinLengthValidation('any_field', 5)])
   })
 })
