@@ -5,7 +5,7 @@ import { HttpPostClientSpy } from '@/data/test'
 
 import { AccountModel } from '@/domain/models'
 import { AddAccountParams } from '@/domain/usecases'
-import { mockAddAccountParams } from '@/domain/test'
+import { mockAddAccountParams, mockAuthentication } from '@/domain/test'
 
 type SutTypes = {
   sut: RemoteAddAccount
@@ -27,5 +27,12 @@ describe('RemoteAddAccount', () => {
     const { httpPostClientSpy, sut } = makeSut(url)
     await sut.add(mockAddAccountParams())
     expect(httpPostClientSpy.url).toBe(url)
+  })
+
+  test('Should call HttpPostClient with correct body', async () => {
+    const { httpPostClientSpy, sut } = makeSut()
+    const addAccountParams = mockAddAccountParams()
+    await sut.add(addAccountParams)
+    expect(httpPostClientSpy.body).toEqual(addAccountParams)
   })
 })
