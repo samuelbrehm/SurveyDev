@@ -39,26 +39,28 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
 
   return (
     <div className={Styles.signup}>
-      <LoginHeader />
+      <LoginHeader/>
       <Context.Provider value={{ state, setState }}>
         <form className={Styles.form}>
           <h2>Criar Conta</h2>
-          <Input type="text" name="name" placeholder="Digite seu nome" />
-          <Input type="email" name="email" placeholder="Digite seu e-mail" />
-          <Input type="password" name="password" placeholder="Digite sua senha" />
-          <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
+          <Input type="text" name="name" placeholder="Digite seu nome"/>
+          <Input type="email" name="email" placeholder="Digite seu e-mail"/>
+          <Input type="password" name="password"
+                 placeholder="Digite sua senha"/>
+          <Input type="password" name="passwordConfirmation"
+                 placeholder="Repita sua senha"/>
           <button
             data-testid="submit"
-            disabled
+            disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError}
             className={Styles.submit}
             type="submit">
             Entrar
           </button>
           <span className={Styles.link}>Voltar para o login</span>
-          <FormStatus />
+          <FormStatus/>
         </form>
       </Context.Provider>
-      <Footer />
+      <Footer/>
     </div>
 
   )
