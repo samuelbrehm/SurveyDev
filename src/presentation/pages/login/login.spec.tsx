@@ -119,7 +119,7 @@ describe('Login Component', () => {
     Helper.testElementExists(sut, 'spinner')
   })
 
-  test('Should call authetication with correct values', async () => {
+  test('Should call authentication with correct values', async () => {
     const { sut, authenticationSpy } = makeSut()
     const email = faker.internet.email()
     const password = faker.internet.password()
