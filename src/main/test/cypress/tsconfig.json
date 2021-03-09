@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "types": ["cypress"]
+    "types": [
+      "cypress"
+    ]
   },
   "include": [
     "../../../../node_modules/cypress",
