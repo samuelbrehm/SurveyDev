@@ -1,0 +1,4 @@
+{
+  "extends": "@/main/test/cypress/tsconfig.json",
+  "exclude": []
+}
