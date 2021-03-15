@@ -3,12 +3,16 @@ import * as HttpMock from '../support/signup-mocks'
 
 import faker from 'faker'
 
-const simulateValidSubmit = (): void => {
+const populateFields = (): void => {
   cy.getByTestId('name').focus().type(faker.name.findName())
   cy.getByTestId('email').focus().type(faker.internet.email())
   const passwordInput = faker.random.alphaNumeric(9)
   cy.getByTestId('password').focus().type(passwordInput)
   cy.getByTestId('passwordConfirmation').focus().type(passwordInput)
+}
+
+const simulateValidSubmit = (): void => {
+  populateFields()
   cy.getByTestId('submit').click()
 }
 
@@ -104,13 +108,18 @@ describe('SignUp', () => {
 
   it('Should present save accessToken if valid credentials are provided', () => {
     HttpMock.mockOk()
-
     simulateValidSubmit()
-
     cy.getByTestId('main-error').should('not.exist')
-
     FormHelper.testUrl('/')
-
     FormHelper.testLocalStorageItem('accessToken')
+  })
+
+  it('Should prevent multiple submits', () => {
+    HttpMock.mockOk()
+
+    populateFields()
+    cy.getByTestId('submit').dblclick()
+
+    FormHelper.testHttpCallsCount(1)
   })
 })
