@@ -101,4 +101,16 @@ describe('SignUp', () => {
 
     FormHelper.testUrl('/signup')
   })
+
+  it('Should present save accessToken if valid credentials are provided', () => {
+    HttpMock.mockOk()
+
+    simulateValidSubmit()
+
+    cy.getByTestId('main-error').should('not.exist')
+
+    FormHelper.testUrl('/')
+
+    FormHelper.testLocalStorageItem('accessToken')
+  })
 })
