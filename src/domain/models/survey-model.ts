@@ -1,10 +1,12 @@
 export type SurveyModel = {
   id: string
   question: string
-  anwasers: [{
-    image?: string
-    anwaser: string
-  }]
+  answers: SurveyAnswerModel[]
   date: Date
-  didAnwaser: boolean
+  didAnswer: boolean
+}
+
+export type SurveyAnswerModel = {
+  image?: string
+  answer: string
 }
